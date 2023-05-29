@@ -22,16 +22,28 @@ public class Conic {
     }
 
     public double[] caractPolynomial(){
-        // Getting the solutions  for the chacaracteristic polinomyal trough Bhasksara
+        // Getting the solutions  for the chacaracteristic polynomial trough Bhasksara
         double a = 1;
         double b = -(a_xsqrd + c_ysqrd);
         double c = -(Math.pow(b_xy, 2) / 4) + a_xsqrd * c_ysqrd;
 
-        double s1 = 1/(2*a) * (-b + Math.sqrt(Math.pow(b, 2) - 4 * a * c));
-        double s2 = 1/(2*a) * (-b - Math.sqrt(Math.pow(b, 2) - 4 * a * c));
+        double s1 = 1/(2*a) * (-b - Math.sqrt(Math.pow(b, 2) - 4 * a * c));
+        double s2 = 1/(2*a) * (-b + Math.sqrt(Math.pow(b, 2) - 4 * a * c));
 
         double[] solution = {s1, s2};
+        System.out.println("The characteristic polynomial solutions are");
+        System.out.println("r1 = " + solution[0] + ", r2 = " + solution[1]);
+        rotationMatrix(s1);
         return solution;
+    }
+
+    private void rotationMatrix(double root){
+
+        Matrix determinant = Matrix.IdentityMatrix(2).multByScalar(-root);
+        Matrix LinearSystem = Matrix.sumMatrix(caracMatrix, determinant);
+        double[] proportion = LinAlg.solveLinearIPS(LinearSystem);
+        double module = LinAlg.getModule(proportion);
+
     }
 
 

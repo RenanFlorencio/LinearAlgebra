@@ -18,7 +18,6 @@ public class Main {
         Conic conic = new Conic(5, -4, 8, 0, 0, -36);
         
         double[] sol = conic.caractPolynomial();
-        System.out.println(sol);
 
         out = Matrix.sumMatrix(m1, m2);
         System.out.println(out);

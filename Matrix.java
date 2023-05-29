@@ -18,6 +18,23 @@ public class Matrix {
         }
     }
 
+    public String toString(){
+
+        String out = "";
+
+        out += "Matrix:\n";
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+                out += matrix[i][j] + "\t";
+            }
+            out += "\n";
+        }
+        out += "\nNumber of rows: " + rows + "\nNumber of columns: " + columns;
+        out += "\n--------------------";
+
+        return out;
+    }
+
     public static Matrix IdentityMatrix(int size){
         // Creates an Identity Matrix 'size' x 'size'
         double[][] array = new double[size][size];
@@ -33,24 +50,6 @@ public class Matrix {
             }
         }
         Matrix out = new Matrix(array);
-        return out;
-    }
-
-
-    public String toString(){
-
-        String out = "";
-
-        out += "Matrix:\n";
-        for(int i = 0; i < rows; i++){
-            for(int j = 0; j < columns; j++){
-                out += matrix[i][j] + "\t";
-            }
-            out += "\n";
-        }
-        out += "\nNumber of rows: " + rows + "\nNumber of columns: " + columns;
-        out += "\n--------------------";
-
         return out;
     }
 
@@ -70,14 +69,16 @@ public class Matrix {
         return out;
     }
 
-    public void multByScalar(double scalar){
+    public Matrix multByScalar(double scalar){
 
+        double[][] array = new double[rows][columns];
         for(int i = 0; i < this.rows; i++){
             for(int j = 0; j < this.columns; j++){
-                this.matrix[i][j] *= scalar;
+                array[i][j] = matrix[i][j] * scalar;
             }
         }
-
+        Matrix out = new Matrix(array);
+        return out;
     }
 
     public static double determinant (double[][] matrix){
@@ -103,6 +104,15 @@ public class Matrix {
         return determinant;
     }
 
+    public static Matrix concat(Matrix matrix1, Matrix matrix2){
+
+        if (matrix1.getRows() != matrix2.getRows()){
+            return null;
+        }
+
+        return null;
+    }
+
     public int getRows() {
         return rows;
     }
@@ -118,6 +128,10 @@ public class Matrix {
 
     public void setSquare(boolean isSquare) {
         this.isSquare = isSquare;
+    }
+
+    public double[][] getMatrix() {
+        return matrix;
     }
 
 }
